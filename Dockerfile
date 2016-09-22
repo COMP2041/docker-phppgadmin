@@ -15,13 +15,14 @@ RUN apt-get update &&\
 RUN ln -sf /dev/stdout /var/log/apache2/access.log &&\
 	ln -sf /dev/stderr /var/log/apache2/error.log &&\
 	cd /var/www/html/ &&\
+	rm index.html  &&\
 	wget -q http://github.com/phppgadmin/phppgadmin/archive/master.zip &&\
 	unzip -o master.zip &&\
 	rm master.zip  &&\
 	mv phppgadmin-master/* .  &&\
 	mv conf/config.inc.php-dist conf/config.inc.php &&\
-	sed -i "s/\$conf\['extra_login_security'\] = true;/\$conf\['extra_login_security'\] = false;/g" conf/config.inc.php &&\
-	sed -i "s/\$conf\['servers'\]\[0\]\['host'\] = '';/\$conf\['servers'\]\[0\]\['host'\] = 'localhost';/g" conf/config.inc.php
+	sed -i "s/'extra_login_security'\] = true;/'extra_login_security'\] = false;/g" conf/config.inc.php &&\
+	sed -i "s/'servers'\]\[0\]\['host'\] = '';/'servers'\]\[0\]\['host'\] = 'localhost';/g" conf/config.inc.php
 	
 EXPOSE 80
 
