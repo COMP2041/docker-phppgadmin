@@ -26,5 +26,5 @@ RUN ln -sf /dev/stdout /var/log/apache2/access.log &&\
     
 EXPOSE 80
 
-add /entrypoint entrypoint
+ADD /entrypoint entrypoint
 ENTRYPOINT ["/entrypoint"]
