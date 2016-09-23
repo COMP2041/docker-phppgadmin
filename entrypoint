@@ -1,0 +1,10 @@
+#!/bin/bash
+
+HOST_IP=`netstat -nr | grep '^0\.0\.0\.0' | awk '{print $2}'`
+sed -i "s/'servers'\]\[0\]\['host'\] = .*/'servers'\]\[0\]\['host'\] = '$HOST_IP';/g" /var/www/html/conf/config.inc.php
+if test $# = 0
+then
+	/usr/sbin/apache2ctl -D FOREGROUND
+else
+	"$@"
+fi
